@@ -1,0 +1,19 @@
+#Variaveis de ambientes
+.env
+
+## Arquivos das dependencias do node
+/node_modules
+
+## Arquivos para distribuição
+/dist
+
+## cache das dependencias
+yarn.lock
+
+## Arquivos temporarios / upload
+tmp/
+upload/
+*.png
+*jpeg
+*.pdf
+.vscode/*
