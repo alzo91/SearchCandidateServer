@@ -8,6 +8,11 @@ class Customer extends Model {
   static init(sequelize) {
     super.init(
       {
+        id: {
+          primaryKey: true,
+          type: Sequelize.BIGINT,
+          autoIncrement: true,
+        },
         name: Sequelize.STRING,
         full_name: Sequelize.STRING,
         email: Sequelize.STRING,
@@ -44,7 +49,20 @@ class Customer extends Model {
       }
     });
 
-    return this;
+    // return this;
+  }
+
+  static associate(sequelize) {
+    console.log('It called a Associate Customer');
+    this.hasMany(sequelize.models.CustomerToken, {
+      foreignKey: 'customer_id',
+    });
+    this.hasMany(sequelize.models.CustomerAddress, {
+      foreignKey: 'id_customer',
+    });
+    /* this.hasMany(sequelize.models.CustomerAddress, {
+      foreignKey: 'customer_id',
+    }); */
   }
 
   chechkPassword(password) {

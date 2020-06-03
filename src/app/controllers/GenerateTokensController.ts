@@ -1,5 +1,5 @@
 import nodeUUID from 'uuid/dist/v1';
-import CustomersToken from '../models/CustomersToken';
+import CustomerToken from '../models/CustomerToken';
 
 class GenerateTokensController {
   async generateCustomerToken(customerId: Number) {
@@ -12,10 +12,11 @@ class GenerateTokensController {
       token_uuid = nodeUUID(opt);
       const [token] = token_uuid.split('-');
       new_token = String(token).toUpperCase();
-      const customer_token = await CustomersToken.findOne({
+
+      const customer_token = await CustomerToken.findOne({
         where: { token },
       });
-      console.log(customer_token);
+
       if (!customer_token) {
         isTokenValid = true;
       } else {
@@ -23,13 +24,13 @@ class GenerateTokensController {
       }
     }
     const newCustomerToken = {
-      customers_id: customerId,
+      customer_id: customerId,
       token: new_token,
       token_uuid: token_uuid,
     };
     console.log(newCustomerToken);
 
-    const customer_token = await CustomersToken.create(newCustomerToken);
+    const customer_token = await CustomerToken.create(newCustomerToken);
 
     return customer_token;
   }

@@ -2,25 +2,29 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('forms', {
+    return queryInterface.createTable('customer_addresses', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.BIGINT,
       },
-      customers_id: {
+      id_customer: {
         type: Sequelize.BIGINT,
         references: {
           model: 'customers',
           key: 'id',
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-        allowNull: true,
+        onDelete: 'CASCADE',
+        allowNull: false,
       },
-      name: { allowNull: false, type: Sequelize.STRING(100) },
-      fields: { allowNull: false, type: Sequelize.JSON },
+      country: { allowNull: true, type: Sequelize.STRING(2), default: 'BR' },
+      zip_code: { allowNull: true, type: Sequelize.STRING(10) },
+      state: { allowNull: true, type: Sequelize.STRING(2) },
+      city: { allowNull: true, type: Sequelize.STRING },
+      street: { allowNull: true, type: Sequelize.STRING },
+      neighborhood: { allowNull: true, type: Sequelize.STRING },
       is_blocked: {
         allowNull: false,
         defaultValue: false,
@@ -31,7 +35,7 @@ module.exports = {
     });
   },
 
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('forms');
+  down: (queryInterface) => {
+    return queryInterface.dropTable('customer_addresses');
   },
 };

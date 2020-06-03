@@ -2,24 +2,14 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('devices_tokens', {
+    return queryInterface.createTable('researcher_tokens', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.BIGINT,
       },
-      customers_id: {
-        type: Sequelize.BIGINT,
-        references: {
-          model: 'customers',
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-        allowNull: true,
-      },
-      researchers_id: {
+      researcher_id: {
         type: Sequelize.BIGINT,
         references: {
           model: 'researchers',
@@ -27,21 +17,18 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-        allowNull: true,
+        allowNull: false,
       },
-      uuid: { allowNull: false, type: Sequelize.STRING(64) },
-      reset_token: {
+      token: { unique: true, allowNull: false, type: Sequelize.STRING(16) },
+      users_counts: {
         allowNull: false,
         defaultValue: 0,
         type: Sequelize.INTEGER,
       },
-      platform: {
-        allowNull: true,
-        type: Sequelize.STRING(10),
-      },
-      build_version: {
-        allowNull: true,
-        type: Sequelize.STRING(5),
+      users_limits: {
+        allowNull: false,
+        defaultValue: 2,
+        type: Sequelize.INTEGER,
       },
       is_blocked: {
         allowNull: false,
@@ -53,7 +40,7 @@ module.exports = {
     });
   },
 
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('devices_tokens');
+  down: (queryInterface) => {
+    return queryInterface.dropTable('researcher_tokens');
   },
 };

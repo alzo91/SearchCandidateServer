@@ -1,7 +1,9 @@
+'use strict';
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('hash_tokens', {
-      customers_id: {
+    return queryInterface.createTable('used_tokens', {
+      customer_id: {
         type: Sequelize.BIGINT,
         references: {
           model: 'customers',
@@ -11,7 +13,7 @@ module.exports = {
         onDelete: 'CASCADE',
         allowNull: false,
       },
-      researchers_id: {
+      researcher_id: {
         type: Sequelize.BIGINT,
         primaryKey: true,
         references: {
@@ -35,6 +37,6 @@ module.exports = {
   },
 
   down: (queryInterface) => {
-    return queryInterface.dropTable('hash_tokens');
+    return queryInterface.dropTable('used_tokens');
   },
 };

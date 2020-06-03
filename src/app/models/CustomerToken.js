@@ -3,10 +3,15 @@ import Sequelize, { Model } from 'sequelize';
 
 import moment from 'moment-timezone';
 
-class CustomersToken extends Model {
+class CustomerToken extends Model {
   static init(sequelize) {
     super.init(
       {
+        id: {
+          primaryKey: true,
+          type: Sequelize.BIGINT,
+          autoIncrement: true,
+        },
         token: Sequelize.STRING,
         users_counts: Sequelize.INTEGER,
         users_limits: Sequelize.INTEGER,
@@ -28,16 +33,19 @@ class CustomersToken extends Model {
           },
         },
       },
-      { sequelize }
+      { underscored: true, sequelize }
     );
 
-    this.belongsTo(sequelize.models.Customer, {
-      foreignKey: 'customers_id',
-      constraints: true,
-    });
+    /* this.belongsTo(sequelize.models.Customer, {
+      foreignKey: 'customer_id',
+    }); */
 
-    return this;
+    /*return this;*/
+  }
+  static associate(sequelize) {
+    console.log('It called a Associate CustomerToken');
+    this.belongsTo(sequelize.models.Customer, { foreignKey: 'customer_id' });
   }
 }
 
-export default CustomersToken;
+export default CustomerToken;

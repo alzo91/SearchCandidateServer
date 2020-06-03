@@ -1,11 +1,23 @@
 import { Op } from 'sequelize';
 import Customer from '../models/Customer';
-// import CustomersTokens from '../models/CustomersTokens';
+import CustomerToken from '../models/CustomerToken';
 import GenerateTokensControler from './GenerateTokensController';
 
 class CustomerController {
   async index(request, response) {
-    const customers = await Customer.findAll();
+    const customers = await Customer.findAll({
+      attributes: [
+        'id',
+        'name',
+        'email',
+        'phone',
+        'code',
+        'is_candidate',
+        'is_blocked',
+        'creation',
+        'last_updated',
+      ],
+    });
     if (customers.length === 0) {
       return response.status(404).json({ error: `Users weren't found!` });
     }
@@ -15,7 +27,27 @@ class CustomerController {
 
   async show(request, response) {
     const { id } = request.params;
-    const customer = await Customer.findOne({ where: { id } });
+    const customer = await Customer.findOne({
+      where: { id },
+      include: [
+        {
+          model: CustomerToken,
+          attributes: ['token', 'users_counts', 'users_limits', 'last_updated'],
+        },
+      ],
+      attributes: [
+        'id',
+        'name',
+        'full_name',
+        'email',
+        'phone',
+        'code',
+        'is_candidate',
+        'is_blocked',
+        'last_updated',
+      ],
+    });
+
     if (!customer) {
       return response.status(404).json({ error: `User id wasn't found!` });
     }

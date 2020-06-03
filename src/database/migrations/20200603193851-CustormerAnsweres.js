@@ -2,14 +2,14 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('answeres', {
+    return queryInterface.createTable('customer_answers', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.BIGINT,
       },
-      customers_id: {
+      customer_id: {
         type: Sequelize.BIGINT,
         references: {
           model: 'customers',
@@ -19,7 +19,7 @@ module.exports = {
         onDelete: 'SET NULL',
         allowNull: false,
       },
-      researchers_id: {
+      researcher_id: {
         type: Sequelize.BIGINT,
         references: {
           model: 'researchers',
@@ -29,10 +29,10 @@ module.exports = {
         onDelete: 'CASCADE',
         allowNull: false,
       },
-      forms_id: {
+      form_id: {
         type: Sequelize.BIGINT,
         references: {
-          model: 'forms',
+          model: 'customer_forms',
           key: 'id',
         },
         onUpdate: 'CASCADE',
@@ -46,7 +46,7 @@ module.exports = {
     });
   },
 
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('answeres');
+  down: (queryInterface) => {
+    return queryInterface.dropTable('customer_answers');
   },
 };

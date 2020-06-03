@@ -2,14 +2,14 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('customers_tokens', {
+    return queryInterface.createTable('customer_tokens', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.BIGINT,
       },
-      customers_id: {
+      customer_id: {
         type: Sequelize.BIGINT,
         references: {
           model: 'customers',
@@ -40,7 +40,7 @@ module.exports = {
     });
   },
 
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('customers_tokens');
+  down: (queryInterface) => {
+    return queryInterface.dropTable('customer_tokens');
   },
 };
