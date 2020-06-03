@@ -1,7 +1,7 @@
 import express from 'express';
 import { resolve } from 'path';
 import routes from './Routes';
-
+import './database';
 class Server {
   constructor() {
     this.server = express();
