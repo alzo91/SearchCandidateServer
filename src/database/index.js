@@ -3,8 +3,8 @@ import Sequelize from 'sequelize';
 import databaseConfig from '../config/database';
 
 import Customer from '../app/models/Customer';
-
-const models = [Customer];
+import CustomersToken from '../app/models/CustomersToken';
+const models = [Customer, CustomersToken];
 
 class Database {
   constructor() {
