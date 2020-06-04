@@ -77,7 +77,8 @@ class ResearcherController {
     const token_info = await GenerateTokensController.generateResearcherToken(
       researcher.id
     );
-    return response.status(200).json({ researcher, token: token_info });
+
+    return response.status(200).json({ researcher, token: token_info.token });
   }
 
   async update(request, response) {
