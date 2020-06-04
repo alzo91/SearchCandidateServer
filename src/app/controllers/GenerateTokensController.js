@@ -2,7 +2,7 @@ import nodeUUID from 'uuid/dist/v1';
 import CustomerToken from '../models/CustomerToken';
 import ResearcherToken from '../models/ResearcherToken';
 class GenerateTokensController {
-  async generateCustomerToken(customerId: Number) {
+  async generateCustomerToken(customerId) {
     let isTokenValid = false;
     let new_token;
     let token_uuid;
@@ -35,7 +35,7 @@ class GenerateTokensController {
     return customer_token;
   }
 
-  async generateResearcherToken(researcherId: Number) {
+  async generateResearcherToken(researcherId) {
     let isTokenValid = false;
     let new_token;
     let token_uuid;

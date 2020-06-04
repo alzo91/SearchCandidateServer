@@ -1,11 +1,10 @@
-import { Request, Response } from 'express';
 import { Op } from 'sequelize';
 import Customer from '../models/Customer';
 import Researcher from '../models/Researcher';
 import GenerateTokensController from './GenerateTokensController';
 
 class ResearcherController {
-  async index(request: Request, response: Response) {
+  async index(request, response) {
     const researchers = await Researcher.findAll({
       include: [
         {
@@ -26,7 +25,7 @@ class ResearcherController {
     return response.status(200).json(researchers);
   }
 
-  async show(request: Request, response: Response) {
+  async show(request, response) {
     const { id } = request.params;
     const researchers = await Researcher.findOne({
       include: [
@@ -41,7 +40,7 @@ class ResearcherController {
     return response.status(200).json(researchers);
   }
 
-  async store(request: Request, response: Response) {
+  async store(request, response) {
     const { customer_id, email, phone, code } = request.body;
 
     if (!!code === false) {
@@ -81,7 +80,7 @@ class ResearcherController {
     return response.status(200).json({ researcher, token: token_info });
   }
 
-  async update(request: Request, response: Response) {
+  async update(request, response) {
     const { id } = request.params;
     return response.status(200).json({ update: true, ...request.body });
   }
