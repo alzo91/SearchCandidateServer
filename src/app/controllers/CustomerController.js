@@ -1,6 +1,7 @@
 import { Op } from 'sequelize';
 import Customer from '../models/Customer';
 import CustomerToken from '../models/CustomerToken';
+import CustomerAddress from '../models/CustomerAddress';
 import GenerateTokensControler from './GenerateTokensController';
 
 class CustomerController {
@@ -33,6 +34,11 @@ class CustomerController {
         {
           model: CustomerToken,
           attributes: ['token', 'users_counts', 'users_limits', 'last_updated'],
+        },
+        {
+          model: CustomerAddress,
+          attributes: ['id', 'country', 'state', 'city', 'zip_code'],
+          where: { is_blocked: false },
         },
       ],
       attributes: [

@@ -1,10 +1,9 @@
 /**It is refering about customers table */
 import Sequelize, { Model } from 'sequelize';
 
-import bcrypt from 'bcryptjs';
 import moment from 'moment-timezone';
 
-class Customer extends Model {
+class Researcher extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -18,8 +17,6 @@ class Customer extends Model {
         email: Sequelize.STRING,
         phone: Sequelize.STRING,
         code: Sequelize.STRING,
-        password: Sequelize.VIRTUAL,
-        password_hash: Sequelize.STRING,
         avatar: Sequelize.STRING,
         is_candidate: Sequelize.BOOLEAN,
         is_blocked: Sequelize.BOOLEAN,
@@ -42,35 +39,20 @@ class Customer extends Model {
       },
       { sequelize }
     );
-
-    this.addHook('beforeSave', async (customer) => {
-      if (customer.password) {
-        customer.password_hash = await bcrypt.hash(customer.password, 8);
-      }
-    });
-
-    // return this;
   }
-
   static associate(sequelize) {
-    console.log('It called a Associate Customer');
-    this.hasMany(sequelize.models.CustomerToken, {
+    console.log('It called a Associate Researcher');
+    this.belongsTo(sequelize.models.Customer, { foreignKey: 'customer_id' });
+  }
+  /* static associate(sequelize) {
+    console.log('It called a Associate Researcher');
+    this.hasMany(sequelize.models.Customer, {
       foreignKey: 'customer_id',
-    });
-    this.hasMany(sequelize.models.CustomerAddress, {
-      foreignKey: 'id_customer',
     });
     this.hasMany(sequelize.models.Researcher, {
       foreignKey: 'customer_id',
     });
-    /* this.hasMany(sequelize.models.CustomerAddress, {
-      foreignKey: 'customer_id',
-    }); */
-  }
-
-  chechkPassword(password) {
-    return bcrypt.compare(password, this.password_hash);
-  }
+  } */
 }
 
-export default Customer;
+export default Researcher;

@@ -15,7 +15,7 @@
     "uuid": "^8.1.0"
   },
   "scripts": {
-    "dev": "nodemon src/index.js -e js",
+    "dev": "nodemon src/index.js -e js,ts",
     "queue": "nodemon src/queue.js",
     "build": "sucrase ./src -d ./dist --transforms imports",
     "start": "node dist/index.js",
@@ -23,6 +23,7 @@
     "removedb": "yarn sequelize db:migrate:undo:all"
   },
   "devDependencies": {
+    "@types/express": "^4.17.6",
     "eslint": "^7.1.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.11.0",

@@ -5,7 +5,16 @@ import databaseConfig from '../config/database';
 import Customer from '../app/models/Customer';
 import CustomerToken from '../app/models/CustomerToken';
 import CustomerAddress from '../app/models/CustomerAddress';
-const models = [Customer, CustomerToken, CustomerAddress];
+import Researcher from '../app/models/Researcher';
+import ResearcherToken from '../app/models/ResearcherToken';
+
+const models = [
+  Customer,
+  CustomerToken,
+  CustomerAddress,
+  Researcher,
+  ResearcherToken,
+];
 
 class Database {
   constructor() {

@@ -38,23 +38,9 @@ module.exports = {
       created_at: { allowNull: false, type: Sequelize.DATE },
       updated_at: { allowNull: false, type: Sequelize.DATE },
     });
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.createTable('users', { id: Sequelize.INTEGER });
-    */
   },
 
   down: (queryInterface) => {
     return queryInterface.dropTable('researchers');
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.dropTable('users');
-    */
   },
 };
