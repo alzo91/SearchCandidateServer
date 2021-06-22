@@ -1,4 +1,4 @@
-import nodeUUID from 'uuid/dist/v1';
+import {v1 as uuidv1} from 'uuid';
 import CustomerToken from '../models/CustomerToken';
 import ResearcherToken from '../models/ResearcherToken';
 class GenerateTokensController {
@@ -8,8 +8,8 @@ class GenerateTokensController {
     let token_uuid;
 
     while (!!isTokenValid === false) {
-      let opt = { msecs: new Date().getTime(), nsecs: 5678 };
-      token_uuid = nodeUUID(opt);
+
+      token_uuid = uuidv1({msecs: new Date().getTime(),nsecs:5678})
       const [token] = token_uuid.split('-');
       new_token = String(token).toUpperCase();
 
@@ -42,7 +42,7 @@ class GenerateTokensController {
 
     while (!!isTokenValid === false) {
       let opt = { msecs: new Date().getTime(), nsecs: 5678 };
-      token_uuid = nodeUUID(opt);
+      token_uuid = uuidv1({msecs: new Date().getTime(),nsecs:5678});
       const [token] = token_uuid.split('-');
       new_token = String(token).toUpperCase();
 
