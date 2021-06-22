@@ -9,7 +9,7 @@
 
 ## cache das dependencias
 yarn.lock
-
+package-lock.json
 ## Arquivos temporarios / upload
 tmp/
 upload/
